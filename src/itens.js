@@ -7,10 +7,7 @@ const itens = [
         nome: "jipe",
         silabas: 2,
     },
-    {
-        nome: "parafuso",
-        silabas: 4,
-    },
+
     {
         nome: "canguru",
         silabas: 3,
@@ -37,7 +34,7 @@ const itens = [
     },
     {
         nome: "bigode",
-        silabas: 4,
+        silabas: 3,
     },
 ]
 

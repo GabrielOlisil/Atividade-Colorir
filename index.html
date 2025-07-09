@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <main class=" px-2 lg:px-0 lg:w-250 m-auto mt-10 ">
+  <main class=" px-2 lg:px-0 lg:w-250 m-auto my-10 ">
 
 
     <div class="max-w-100">
@@ -57,11 +57,11 @@
       </calendar-date>
     </div>
 
-    <article class="sm:grid grid-cols-6 mt-5 gap-1">
-      <section class="col-span-2">
+    <article class="flex flex-wrap-reverse sm:flex-nowrap mt-5 gap-1">
+      <section class=" shrink-0 basis-60 grow  self-stretch mb-4 sm:mb-0">
         <h2 class="text-accent-content bg-accent px-2 rounded-lg text-lg w-full">Escolha a cor</h2>
 
-        <div class="grid p-1 gap-x-2 grid-cols-4 grid-rows-2">
+        <div class="grid p-1 gap-x-2 grid-cols-4 grid-rows-2 mb-10">
           <input type="color" class="row-span-2 w-full h-full " id="color-code">
 
           <p class="col-span-3">Código da cor</p>
@@ -69,61 +69,28 @@
 
         </div>
 
+        <button class="btn w-full btn-success" id="validar">Validar</button>
+
       </section>
-      <section class="col-span-4">
+      <section class="basis-100 grow shrink">
         <h1 class="text-primary-content bg-primary px-2 rounded-lg text-lg">Quantas sílabas tem?</h1>
         <section class="p-1">
           <h2>Pinte a quantidade de sílabas, ao final, valide sua tentativa</h2>
 
-          <section class="grid grid-cols-3 gap-5">
-            <div class="grid grid-cols-4 grid-rows-5">
-              <div class="skeleton row-span-3 col-span-4"></div>
-              <div class="col-span-4 text-center">Parafuso</div>
-              <div class="text-center">1</div>
-              <div class="text-center">2</div>
-              <div class="text-center">3</div>
-              <div class="text-center">4</div>
+          <section class="grid grid-cols-2 md:grid-cols-3 gap-5 " id="itensImagens">
+            <div>
+              <div class="skeleton w-ful h-30"></div>
+              <div class=" text-center">Parafuso</div>
+
+              <div class="num-silabas display grid grid-cols-4">
+
+                <div class="text-center" control-value="1">1</div>
+                <div class="text-center" control-value="2">2</div>
+                <div class="text-center" control-value="3">3</div>
+                <div class="text-center" control-value="4">4</div>
+              </div>
             </div>
-            <div class="grid grid-cols-4 grid-rows-5">
-              <div class="skeleton row-span-3 col-span-4"></div>
-              <div class="col-span-4 text-center">Parafuso</div>
-              <div class="text-center">1</div>
-              <div class="text-center">2</div>
-              <div class="text-center">3</div>
-              <div class="text-center">4</div>
-            </div>
-            <div class="grid grid-cols-4 grid-rows-5">
-              <div class="skeleton row-span-3 col-span-4"></div>
-              <div class="col-span-4 text-center">Parafuso</div>
-              <div class="text-center">1</div>
-              <div class="text-center">2</div>
-              <div class="text-center">3</div>
-              <div class="text-center">4</div>
-            </div>
-            <div class="grid grid-cols-4 grid-rows-5">
-              <div class="skeleton row-span-3 col-span-4"></div>
-              <div class="col-span-4 text-center">Parafuso</div>
-              <div class="text-center">1</div>
-              <div class="text-center">2</div>
-              <div class="text-center">3</div>
-              <div class="text-center">4</div>
-            </div>
-            <div class="grid grid-cols-4 grid-rows-5">
-              <div class="skeleton row-span-3 col-span-4"></div>
-              <div class="col-span-4 text-center">Parafuso</div>
-              <div class="text-center">1</div>
-              <div class="text-center">2</div>
-              <div class="text-center">3</div>
-              <div class="text-center">4</div>
-            </div>
-            <div class="grid grid-cols-4 grid-rows-5">
-              <div class="skeleton row-span-3 col-span-4"></div>
-              <div class="col-span-4 text-center">Parafuso</div>
-              <div class="text-center">1</div>
-              <div class="text-center">2</div>
-              <div class="text-center">3</div>
-              <div class="text-center">4</div>
-            </div>
+
 
           </section>
 
@@ -131,13 +98,49 @@
       </section>
 
 
+
+
     </article>
+
+    <div role="alert" class="alert alert-neutral fixed bottom-3 left-2 right-2 hidden" id="modal">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current cursor-pointer" id="close-modal"
+        fill="none" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <span id="modal-content" style="white-space: pre;" class="font-mono"></span>
+    </div>
 
   </main>
   <script type="module" src="/src/main.js"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <script>
+
+
+  <script type="module">
+    import itens from "./src/itens.js"
+
+    let itensPlacement = document.getElementById("itensImagens")
+    itensPlacement.innerHTML = ""
+
+    itens.forEach(e => {
+      itensPlacement.innerHTML += `
+      <div class="border rounded-lg p-2 mb-6 sm:mb-0">
+        <img src="${(e.nome)}.png" />
+        <div class=" text-center">${e.nome.toUpperCase()}</div>
+
+        <div class="num-silabas  display grid grid-cols-4">
+
+          <div class="text-center cursor-pointer" control-value="1">1</div>
+          <div class="text-center cursor-pointer" control-value="2">2</div>
+          <div class="text-center cursor-pointer" control-value="3">3</div>
+          <div class="text-center cursor-pointer" control-value="4">4</div>
+        </div>
+      </div>
+      
+      `
+    })
+
     lucide.createIcons();
 
     const hoje = new Date();
@@ -157,8 +160,10 @@
 
     })
 
-    const color = document.getElementById("color-code").value
+    const colorEl = document.getElementById("color-code")
 
+    colorEl.value = "#422ad5"
+    let color = colorEl.value
 
     document.getElementById("color-code-field").innerText = color
 
@@ -169,6 +174,59 @@
       currentColor = this.value
       document.getElementById("color-code-field").innerText = currentColor
     })
+
+
+    const cards = document.querySelectorAll(".num-silabas")
+
+    cards.forEach(function (card) {
+
+
+      card.addEventListener("click", function (e) {
+        const clicado = e.target
+
+        Array.from(card.children).forEach(c => {
+          c.removeAttribute("marked")
+          c.style = "background-color: transparent"
+        })
+
+
+        if (card.contains(clicado) && clicado !== card) {
+          clicado.setAttribute("marked", "")
+          clicado.style = "background-color: " + currentColor
+        }
+      })
+    })
+
+
+    document.getElementById("validar").addEventListener("click", function () {
+      const resposta = Array.from(cards).map(function (card, index) {
+
+        if (card.querySelector("div[marked]")?.getAttribute("control-value") == itens[index].silabas) {
+          return itens[index].nome.padEnd(10, " ") + ": está correto"
+        }
+        return itens[index].nome.padEnd(10, " ") + ": está errado"
+
+      })
+
+      document.getElementById("modal-content").innerText = resposta.join("\n")
+      document.getElementById("modal").classList.remove("hidden")
+
+
+      setTimeout(() => {
+        modal.classList.add("hidden");
+      }, 5000);
+
+
+    })
+
+    document.getElementById("close-modal").addEventListener("click", _ => {
+      const modal = document.getElementById("modal");
+      modal.classList.add("hidden");
+
+
+    })
+
+
 
 
   </script>
