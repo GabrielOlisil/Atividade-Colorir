@@ -6,12 +6,172 @@
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="src/style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
   <title>Vite App</title>
 </head>
 
 <body>
-  <a href="" class="btn btn-accent">oi</a>
+  <main class=" px-2 lg:px-0 lg:w-250 m-auto mt-10 ">
+
+
+    <div class="max-w-100">
+
+      <div class="mb-3">
+
+        <label class="input w-full">
+          <span class="label">Nome:</span>
+          <input type="text" placeholder="Seu nome" />
+        </label>
+      </div>
+
+
+      <div>
+        <div class="join w-full">
+
+          <label class="input join-item w-full">
+            <span class="label">Data:</span>
+            <input type="text" class="input" id="data">
+          </label>
+          <button popovertarget="cally-popover1" id="cally1" class=" btn btn-primary join-item cursor-pointer"
+            style="anchor-name:--cally1">
+            <i data-lucide="calendar-days"></i>
+          </button>
+        </div>
+
+
+      </div>
+    </div>
+    <div popover id="cally-popover1" class="dropdown bg-base-100 rounded-box shadow-lg"
+      style="position-anchor:--cally1">
+      <calendar-date class="cally" id="date-picker">
+        <svg aria-label=" Previous" class="fill-current size-4" slot="previous" xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24">
+          <path d="M15.75 19.5 8.25 12l7.5-7.5"></path>
+        </svg>
+        <svg aria-label="Next" class="fill-current size-4" slot="next" xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24">
+          <path d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
+        </svg>
+        <calendar-month></calendar-month>
+      </calendar-date>
+    </div>
+
+    <article class="sm:grid grid-cols-6 mt-5 gap-1">
+      <section class="col-span-2">
+        <h2 class="text-accent-content bg-accent px-2 rounded-lg text-lg w-full">Escolha a cor</h2>
+
+        <div class="grid p-1 gap-x-2 grid-cols-4 grid-rows-2">
+          <input type="color" class="row-span-2 w-full h-full " id="color-code">
+
+          <p class="col-span-3">Código da cor</p>
+          <p class="col-span-3" id="color-code-field">codigo</p>
+
+        </div>
+
+      </section>
+      <section class="col-span-4">
+        <h1 class="text-primary-content bg-primary px-2 rounded-lg text-lg">Quantas sílabas tem?</h1>
+        <section class="p-1">
+          <h2>Pinte a quantidade de sílabas, ao final, valide sua tentativa</h2>
+
+          <section class="grid grid-cols-3 gap-5">
+            <div class="grid grid-cols-4 grid-rows-5">
+              <div class="skeleton row-span-3 col-span-4"></div>
+              <div class="col-span-4 text-center">Parafuso</div>
+              <div class="text-center">1</div>
+              <div class="text-center">2</div>
+              <div class="text-center">3</div>
+              <div class="text-center">4</div>
+            </div>
+            <div class="grid grid-cols-4 grid-rows-5">
+              <div class="skeleton row-span-3 col-span-4"></div>
+              <div class="col-span-4 text-center">Parafuso</div>
+              <div class="text-center">1</div>
+              <div class="text-center">2</div>
+              <div class="text-center">3</div>
+              <div class="text-center">4</div>
+            </div>
+            <div class="grid grid-cols-4 grid-rows-5">
+              <div class="skeleton row-span-3 col-span-4"></div>
+              <div class="col-span-4 text-center">Parafuso</div>
+              <div class="text-center">1</div>
+              <div class="text-center">2</div>
+              <div class="text-center">3</div>
+              <div class="text-center">4</div>
+            </div>
+            <div class="grid grid-cols-4 grid-rows-5">
+              <div class="skeleton row-span-3 col-span-4"></div>
+              <div class="col-span-4 text-center">Parafuso</div>
+              <div class="text-center">1</div>
+              <div class="text-center">2</div>
+              <div class="text-center">3</div>
+              <div class="text-center">4</div>
+            </div>
+            <div class="grid grid-cols-4 grid-rows-5">
+              <div class="skeleton row-span-3 col-span-4"></div>
+              <div class="col-span-4 text-center">Parafuso</div>
+              <div class="text-center">1</div>
+              <div class="text-center">2</div>
+              <div class="text-center">3</div>
+              <div class="text-center">4</div>
+            </div>
+            <div class="grid grid-cols-4 grid-rows-5">
+              <div class="skeleton row-span-3 col-span-4"></div>
+              <div class="col-span-4 text-center">Parafuso</div>
+              <div class="text-center">1</div>
+              <div class="text-center">2</div>
+              <div class="text-center">3</div>
+              <div class="text-center">4</div>
+            </div>
+
+          </section>
+
+        </section>
+      </section>
+
+
+    </article>
+
+  </main>
   <script type="module" src="/src/main.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    lucide.createIcons();
+
+    const hoje = new Date();
+
+    const ano = hoje.getFullYear();
+    const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+    const dia = String(hoje.getDate()).padStart(2, '0');
+
+
+
+
+    document.getElementById("data").value = `${dia}/${mes}/${ano}`
+    document.getElementById("date-picker").addEventListener("change", function () {
+
+      const [ano, mes, dia] = this.value.split("-");
+      document.getElementById('data').value = `${dia}/${mes}/${ano}`
+
+    })
+
+    const color = document.getElementById("color-code").value
+
+
+    document.getElementById("color-code-field").innerText = color
+
+    let currentColor = color
+
+
+    document.getElementById("color-code").addEventListener("change", function changeColor() {
+      currentColor = this.value
+      document.getElementById("color-code-field").innerText = currentColor
+    })
+
+
+  </script>
 </body>
 
 </html>
