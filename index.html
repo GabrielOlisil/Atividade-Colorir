@@ -102,7 +102,7 @@
 
     </article>
 
-    <div role="alert" class="alert alert-neutral fixed bottom-3 left-2 right-2 hidden" id="modal">
+    <div role="alert" class="alert alert-info fixed bottom-3 left-2 right-2 hidden" id="modal">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current cursor-pointer" id="close-modal"
         fill="none" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -112,124 +112,9 @@
     </div>
 
   </main>
-  <script type="module" src="/src/main.js"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
 
-
-
-  <script type="module">
-    import itens from "./src/itens.js"
-
-    let itensPlacement = document.getElementById("itensImagens")
-    itensPlacement.innerHTML = ""
-
-    itens.forEach(e => {
-      itensPlacement.innerHTML += `
-      <div class="border rounded-lg p-2 mb-6 sm:mb-0">
-        <img src="${(e.nome)}.png" />
-        <div class=" text-center">${e.nome.toUpperCase()}</div>
-
-        <div class="num-silabas  display grid grid-cols-4">
-
-          <div class="text-center cursor-pointer" control-value="1">1</div>
-          <div class="text-center cursor-pointer" control-value="2">2</div>
-          <div class="text-center cursor-pointer" control-value="3">3</div>
-          <div class="text-center cursor-pointer" control-value="4">4</div>
-        </div>
-      </div>
-      
-      `
-    })
-
-    lucide.createIcons();
-
-    const hoje = new Date();
-
-    const ano = hoje.getFullYear();
-    const mes = String(hoje.getMonth() + 1).padStart(2, '0');
-    const dia = String(hoje.getDate()).padStart(2, '0');
-
-
-
-
-    document.getElementById("data").value = `${dia}/${mes}/${ano}`
-    document.getElementById("date-picker").addEventListener("change", function () {
-
-      const [ano, mes, dia] = this.value.split("-");
-      document.getElementById('data').value = `${dia}/${mes}/${ano}`
-
-    })
-
-    const colorEl = document.getElementById("color-code")
-
-    colorEl.value = "#422ad5"
-    let color = colorEl.value
-
-    document.getElementById("color-code-field").innerText = color
-
-    let currentColor = color
-
-
-    document.getElementById("color-code").addEventListener("change", function changeColor() {
-      currentColor = this.value
-      document.getElementById("color-code-field").innerText = currentColor
-    })
-
-
-    const cards = document.querySelectorAll(".num-silabas")
-
-    cards.forEach(function (card) {
-
-
-      card.addEventListener("click", function (e) {
-        const clicado = e.target
-
-        Array.from(card.children).forEach(c => {
-          c.removeAttribute("marked")
-          c.style = "background-color: transparent"
-        })
-
-
-        if (card.contains(clicado) && clicado !== card) {
-          clicado.setAttribute("marked", "")
-          clicado.style = "background-color: " + currentColor
-        }
-      })
-    })
-
-
-    document.getElementById("validar").addEventListener("click", function () {
-      const resposta = Array.from(cards).map(function (card, index) {
-
-        if (card.querySelector("div[marked]")?.getAttribute("control-value") == itens[index].silabas) {
-          return itens[index].nome.padEnd(10, " ") + ": está correto"
-        }
-        return itens[index].nome.padEnd(10, " ") + ": está errado"
-
-      })
-
-      document.getElementById("modal-content").innerText = resposta.join("\n")
-      document.getElementById("modal").classList.remove("hidden")
-
-
-      setTimeout(() => {
-        modal.classList.add("hidden");
-      }, 5000);
-
-
-    })
-
-    document.getElementById("close-modal").addEventListener("click", _ => {
-      const modal = document.getElementById("modal");
-      modal.classList.add("hidden");
-
-
-    })
-
-
-
-
-  </script>
+  <script type="module" src="/src/main.js"></script>
 </body>
 
 </html>
